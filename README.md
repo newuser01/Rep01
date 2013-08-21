@@ -5,6 +5,8 @@ A batch processing library used as the aggregation engine for the Home Page Repo
 
 ![My Screenshot](http://newuser02.github.com/newuser02/images/Test1.png)
 
+![My Screenshot](http://newuser02.github.com/newuser02/blob/master/forkit.gif)
+
 
 
 
