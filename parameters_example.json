@@ -1,0 +1,132 @@
+{
+  "comments" : {
+
+    "README":"This is a fake block I added that does not do anything but have info and should be removed",
+
+    "parameter_help": {
+      "mongoose_connections.config":{
+        "used_by":["Dispatcher", "Workflow Manager"],
+        "purpose":"Provides persistent storage for workflows and job and worker metadata",
+        "see":"http://mongodb.github.io/node-mongodb-native/api-generated/db.html",
+        "defined_in":"antfarm/services.json"
+      },
+      "mongo_storage.config":{
+        "used_by":["Worker"],
+        "purpose":"Output from jobs are placed into this database (both GridFS and Mongo)",
+        "see":"http://mongodb.github.io/node-mongodb-native/api-generated/db.html",
+        "defined_in":"antfarm/Worker/storage.json"
+      },
+      "gridfs_storage": {
+        "used_by":["Worker"],
+        "purpose":"Output from HTTP Request and Encoding jobs go into GridFS as binary data - defines GridFS options, uses mongo_storage",
+        "see":"http://mongodb.github.io/node-mongodb-native/api-generated/gridstore.html",
+        "defined_in":"antfarm/Worker/storage.json"
+      },
+      "worker.config": {
+        "used_by":["Worker"],
+        "purpose":"Define the hostname or the network adapter and the max number of jobs for this worker",
+        "see":"http://github.private.linksynergy.com/SD/antfarm/blob/dev/Worker/README.md",
+        "defined_in":"antfarm/Worker/interfaces.json"
+      },
+      "worker_http_interface.config": {
+        "used_by":["Worker"],
+        "purpose":"Define the port for the Worker's HTTP interface and how to connect to the Dispatcher",
+        "defined_in":"antfarm/Worker/interfaces.json"
+      },
+      "dispacher.config": {
+        "used_by":["Dispatcher"],
+        "purpose":"Defines the various check intervals for jobs and workers",
+        "see":"http://github.private.linksynergy.com/SD/antfarm/blob/dev/Dispatcher/README.md",
+        "defined_in":"antfarm/Dispatcher/services.json"
+      },
+      "dispatcher_http_interface.config": {
+        "used_by":["Worker"],
+        "purpose":"Define the port for the Dispatcher to listen on",
+        "defined_in":"antfarm/Dispatcher/services.json"
+      },
+      "wm_http_interface.config": {
+        "used_by":["Worker"],
+        "purpose":"Define the port for the Workflow Manager's HTTP interface and how to connect to the Dispatcher",
+        "defined_in":"antfarm/WorkflowManager/services.json"
+      }
+    }
+  },
+
+  "parameters": {
+    "mongoose_connection.config": {
+      "uri":"mongodb://localhost:27017/antfarm",
+      "db_options": {
+        "user":"antfarm",
+        "pass":"antfarm",
+        "server": {
+          "socketOptions": { "keepAlive": 1 }
+        },
+        "replset": {
+          "rs_name":"optimus_rs_1",
+          "socketOptions": { "keepAlive": 1 }
+        }
+      }
+    },
+    "mongo_storage.config": {
+      "w":1
+    },
+    "mongo_storage.user":"antfarm",
+    "mongo_storage.pass":"antfarm",
+    "mongo_storage.db_name":"antfarm",
+    "mongo_storage.repl_set_servers": [
+      {"host":"gcvs0172.private.linksynergy.com", "port":27017},
+      {"host":"gcvs4100.private.linksyerngy.com", "port":27017}
+    ],
+    "gridfs_storage.class":"./lib/storage/MongoGridFsStorage",
+    "gridfs_storage.write.config":{
+      "mode":"w",
+      "chunk_size":51200,
+      "options": {
+        "root":"fs"
+      }
+    },
+    "gridfs_storage.read.config":{
+      "mode":"r",
+      "chunk_size":51200,
+      "options": {
+        "root":"fs"
+      }
+    },
+    "worker.config": {
+      "hostname": null,
+      "max_jobs": 1,
+      "shouldUseHostname": false,
+      "shouldUseNetworkAdapterIp": true,
+      "network_adapter": "eth1"
+    },
+    "worker_http_interface.config": {
+      "port": 8082,
+      "dispatcher": {
+        "host": "localhost",
+        "port": 8081
+      }
+    },
+    "dispatcher.config": {
+      "jobs": {
+        "cooldown_period": 2000,
+        "job_verification_interval": 10000
+      },
+      "workers": {
+        "ping_interval": 30000,
+        "max_retries": 3,
+        "dead_worker_ping_interval": 60000,
+        "dead_worker_max_retries": 10
+      }
+    },
+    "dispatcher_http_interface.config": {
+      "port": 8081
+    },
+    "wm_http_interface.config": {
+      "port": 8083,
+      "dispatcher": {
+        "host": "localhost",
+        "port": 8081
+      }
+    }
+  }
+}
