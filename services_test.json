@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "mongo_grid_fs_storage.file": "../../../../lib/storage/MongoGridFsStorage",
+    "csv.class": "./Worker/test/lib/transformer/mocks/MockCsv",
+    "iconv.class": "./Worker/test/lib/transformer/mocks/MockIconv",
+    "express.file": "./Worker/test/lib/interfaces/mocks/MockExpress",
+    "http.class": "./Worker/test/lib/interfaces/mocks/MockHttp",
+    "mongodb.class": "./Worker/test/lib/storage/mocks/MockMongoDb",
+    "mock_iconv.file": "./Worker/test/lib/transformer/mocks/MockIconv",
+    "stream.class": "./Worker/test/lib/storage/mocks/MockStream"
+  },
+  "services": {
+    "http": {
+      "class":"%http.class%"
+    },
+    "mock_iconv": {
+      "class": "%mock_iconv.file%"
+    }
+  }
+}
