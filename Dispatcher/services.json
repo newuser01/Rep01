@@ -1,51 +1,51 @@
 {
   "parameters": {
-      "dispatcher_http_interface.class":"./lib/interfaces/HTTPInterface",
-          "worker_schema.class":"./lib/schemas/WorkerSchema",
-	      "dispatcher.class":"./lib/Dispatcher",
-	          "dispatcher.config": {
-		        "jobs": {
-			        "cooldown_period": 2000,
-				        "job_verification_interval": 10000
-					      },
-					            "workers": {
-						            "ping_interval": 30000,
-							            "max_retries": 3,
-								            "dead_worker_ping_interval": 60000,
-									            "dead_worker_max_retries": 5
-										          }
-											      },
-											          "dispatcher_http_interface.config": {
-												        "port": 8081
-													    }
-													      },
-													        "services": {
-														    "dispatcher_http_interface": {
-														          "class":"%dispatcher_http_interface.class%",
-															        "arguments":[
-																        "@express_app",
-																	        "@express_lib",
-																		        "@http",
-																			        "@http",
-																				        "%dispatcher_http_interface.config%"
-																					      ]
-																					          },
-																						      "worker_schema": {
-																						            "class":"%worker_schema.class%",
-																							          "arguments": ["@mongoose"]
-																								      },
-																								          "dispatcher": {
-																									        "class":"%dispatcher.class%",
-																										      "arguments":[
-																										              "@dispatcher_http_interface",
-																											              "@job_schema",
-																												              "@worker_schema",
-																													              "@mongoose_connection",
-																														              "%dispatcher.config%"
-																															            ],
-																																          "calls":[
-																																	          ["addEmitter", ["@event_emitters.timer"]]
-																																		        ]
-																																			    }
-																																			      }
-																																			      }
+    "dispatcher_http_interface.class":"./lib/interfaces/HTTPInterface",
+    "worker_schema.class":"./lib/schemas/WorkerSchema",
+    "dispatcher.class":"./lib/Dispatcher",
+    "dispatcher.config": {
+      "jobs": {
+        "cooldown_period": 2000,
+        "job_verification_interval": 10000
+      },
+      "workers": {
+        "ping_interval": 30000,
+        "max_retries": 3,
+        "dead_worker_ping_interval": 60000,
+        "dead_worker_max_retries": 5
+      }
+    },
+    "dispatcher_http_interface.config": {
+      "port": 8081
+    }
+  },
+  "services": {
+    "dispatcher_http_interface": {
+      "class":"%dispatcher_http_interface.class%",
+      "arguments":[
+        "@express_app",
+        "@express_lib",
+        "@http",
+        "@http",
+        "%dispatcher_http_interface.config%"
+      ]
+    },
+    "worker_schema": {
+      "class":"%worker_schema.class%",
+      "arguments": ["@mongoose"]
+    },
+    "dispatcher": {
+      "class":"%dispatcher.class%",
+      "arguments":[
+        "@dispatcher_http_interface",
+        "@job_schema",
+        "@worker_schema",
+        "@mongoose_connection",
+        "%dispatcher.config%"
+      ],
+      "calls":[
+        ["addEmitter", ["@event_emitters.timer"]]
+      ]
+    }
+  }
+}
