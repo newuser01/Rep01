@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "os.class":"os",
+    "http.class":"http",
+    "https.class":"https",
+    "stream.class":"stream",
+    "mongodb.class":"mongodb",
+    "iconv.class":"iconv",
+    "csv.class":"csv",
+    "express.class": "express",
+    "mongoose.class": "mongoose",
+    "mongoose_connection.class":"./lib/mongoose/ConnectionWrapper",
+    "mongoose_connection.config": {
+      "uri":"mongodb://localhost:27017/antfarm",
+      "db_options": {
+        "user":"antfarm",
+        "pass":"antfarm",
+        "server": {
+          "socketOptions": { "keepAlive": 1 }
+        },
+        "replset": {
+          "rs_name":"optimus_rs_1",
+          "socketOptions": { "keepAlive": 1 }
+        }
+      }
+    },
+    "job_schema.class":"./lib/schemas/JobSchema",
+    "event_emitters.timer.class":"./lib/event_emitters/Timer",
+    "event_emitters.timer.interval":1000
+  },
+  "services": {
+    "os": {
+      "class":"%os.class%",
+      "isObject":true
+    },
+    "http": {
+      "class":"%http.class%",
+      "isObject":true
+    },
+    "https": {
+      "class":"%https.class%",
+      "isObject":true
+    },
+    "stream": {
+      "class":"%stream.class%",
+      "isObject":true
+    },
+    "mongodb": {
+      "class":"%mongodb.class%",
+      "isObject":true
+    },
+    "csv": {
+      "class":"%csv.class%",
+      "isObject":true
+    },
+    "iconv": {
+      "class":"%iconv.class%",
+      "isObject":true
+    },
+    "express_lib": {
+      "class": "%express.class%",
+      "isObject": true
+    },
+    "express_app": {
+      "class": "%express.class%"
+    },
+    "mongoose": {
+      "class": "%mongoose.class%",
+      "isObject": true
+    },
+    "mongoose_connection": {
+      "class":"%mongoose_connection.class%",
+      "arguments":["@mongoose", "%mongoose_connection.config%"]
+    },
+    "job_schema": {
+      "class":"%job_schema.class%",
+      "arguments":["@mongoose"]
+    },
+    "event_emitters.timer": {
+      "class":"%event_emitters.timer.class%",
+      "arguments":["%event_emitters.timer.interval%"]
+    }
+  }
+}
