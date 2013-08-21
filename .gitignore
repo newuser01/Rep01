@@ -1,0 +1,6 @@
+/nbproject
+/node_modules
+/Worker/lib-cov/
+/Worker/coverage.html
+parameters.json
+.idea
