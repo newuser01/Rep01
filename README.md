@@ -9,6 +9,7 @@ A batch processing library used as the aggregation engine for the Home Page Repo
 
 ![My Screenshot](http://newuser02.github.com/newuser02/master/Google-icon.png)
 
+{<img src="https://travis-ci.org/newuser01/Google-icon.png" />}[https://travis-ci.org/[newuser01]/[Google-icon]]
 
 
 ![Screenshot] (https://github.com/newuser02/raw/master/img/solarized-values-dark.png) 
