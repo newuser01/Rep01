@@ -11,7 +11,7 @@ A batch processing library used as the aggregation engine for the Home Page Repo
 
 
 
-
+![Screenshot] (https://github.com/newuser02/raw/master/img/solarized-values-dark.png) 
 
 It is designed to be a highly-available cluster to perform any job that it knows how to perform.
 
